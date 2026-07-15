@@ -3,23 +3,31 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#f7f4ec">
+    <meta name="theme-color" content="#f5f0e6">
+    <meta name="robots" content="noindex, nofollow">
     <title>Добро пожаловать в Garden — тренинг новичка</title>
     <style>
       :root {
-        --paper: #f7f4ec;
-        --paper-strong: #fffaf0;
-        --ink: #16251d;
-        --muted: #617066;
-        --green: #b7df3d;
-        --green-dark: #0f5b3d;
-        --mint: #dff0e3;
-        --sky: #c9e9f5;
-        --clay: #d9b48f;
+        --cream: #f5f0e6;
+        --milk: #fffaf0;
+        --linen: #e9dfcf;
+        --sage: #d9e5d6;
+        --sage-strong: #a8c7a2;
+        --leaf: #b7df3d;
+        --moss: #28533f;
+        --forest: #11241d;
+        --ink: #17231d;
+        --muted: #657268;
+        --mist: #d7e7ea;
+        --clay: #d7b894;
+        --cocoa: #7a5b40;
         --navy: #111a35;
-        --line: rgba(22, 37, 29, 0.14);
-        --shadow: 0 18px 45px rgba(17, 26, 53, 0.12);
+        --line: rgba(23, 35, 29, 0.14);
+        --soft-line: rgba(23, 35, 29, 0.08);
+        --shadow: 0 26px 70px rgba(21, 30, 25, 0.14);
         --radius: 8px;
+        --slide-pad-x: clamp(44px, 6vw, 92px);
+        --slide-pad-y: clamp(70px, 8vh, 104px);
       }
 
       * {
@@ -28,8 +36,9 @@
 
       html {
         min-height: 100%;
-        background: var(--paper);
+        background: var(--cream);
         scroll-behavior: smooth;
+        scroll-snap-type: y mandatory;
       }
 
       body {
@@ -37,166 +46,145 @@
         margin: 0;
         color: var(--ink);
         background:
-          linear-gradient(90deg, rgba(183, 223, 61, 0.12) 1px, transparent 1px),
-          linear-gradient(180deg, #fbf8f0 0%, var(--paper) 54%, #edf4ef 100%);
-        background-size: 56px 56px, auto;
+          linear-gradient(90deg, rgba(23, 35, 29, 0.035) 1px, transparent 1px),
+          linear-gradient(180deg, #fffaf0 0%, var(--cream) 48%, #edf2eb 100%);
+        background-size: 72px 72px, auto;
         font-family: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
-        line-height: 1.45;
+        line-height: 1.42;
       }
 
-      a {
-        color: inherit;
+      body::before {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background:
+          linear-gradient(115deg, rgba(183, 223, 61, 0.13), transparent 34%),
+          linear-gradient(265deg, rgba(215, 184, 148, 0.18), transparent 42%);
+        content: "";
+        pointer-events: none;
       }
 
       button {
         font: inherit;
       }
 
-      .deck-shell {
+      .topbar {
+        position: fixed;
+        z-index: 20;
+        top: auto;
+        bottom: 18px;
+        left: 24px;
+        right: 24px;
         display: grid;
-        min-height: 100vh;
-        grid-template-columns: 280px minmax(0, 1fr);
-      }
-
-      .sidebar {
-        position: sticky;
-        top: 0;
-        height: 100vh;
-        display: grid;
-        grid-template-rows: auto 1fr auto;
-        gap: 22px;
-        border-right: 1px solid var(--line);
-        background: rgba(255, 250, 240, 0.92);
-        padding: 24px 18px;
-        backdrop-filter: blur(16px);
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        gap: 18px;
+        align-items: center;
+        border: 1px solid rgba(255, 250, 240, 0.58);
+        border-radius: 10px;
+        background: rgba(255, 250, 240, 0.74);
+        box-shadow: 0 18px 42px rgba(17, 26, 53, 0.1);
+        padding: 10px;
+        backdrop-filter: blur(18px);
       }
 
       .brand {
-        display: grid;
-        gap: 14px;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
       }
 
-      .brand img {
-        width: 128px;
+      .brand-mark {
+        display: grid;
+        width: 132px;
+        height: 42px;
+        place-items: center;
+        border-radius: 8px;
+        background: var(--navy);
+        padding: 0 14px;
+      }
+
+      .brand-mark img {
+        display: block;
+        width: 100%;
         height: auto;
       }
 
-      .brand-logo {
-        width: fit-content;
-        border-radius: 8px;
-        background: var(--navy);
-        padding: 12px 14px 10px;
+      .brand-context {
+        display: grid;
+        gap: 1px;
       }
 
-      .eyebrow {
-        display: inline-flex;
-        width: fit-content;
-        align-items: center;
-        gap: 8px;
-        border: 1px solid rgba(15, 91, 61, 0.24);
-        border-radius: 999px;
-        background: rgba(223, 240, 227, 0.72);
-        color: var(--green-dark);
-        padding: 6px 10px;
+      .brand-context strong {
+        color: var(--forest);
+        font-size: 14px;
+        line-height: 1.1;
+      }
+
+      .brand-context span {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .progress-wrap {
+        display: grid;
+        gap: 7px;
+        min-width: 0;
+      }
+
+      .progress-label {
+        display: flex;
+        min-width: 0;
+        justify-content: space-between;
+        gap: 12px;
+        color: var(--muted);
         font-size: 12px;
         font-weight: 800;
-        letter-spacing: 0;
       }
 
-      .eyebrow::before {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: var(--green);
-        content: "";
-      }
-
-      .nav {
-        display: grid;
-        align-content: start;
-        gap: 6px;
-        overflow: auto;
-        padding-right: 4px;
-      }
-
-      .nav a {
-        display: grid;
-        grid-template-columns: 28px 1fr;
-        gap: 8px;
-        align-items: center;
-        border-radius: 8px;
-        color: var(--muted);
-        padding: 8px;
-        font-size: 13px;
-        font-weight: 700;
-        text-decoration: none;
-      }
-
-      .nav a:hover,
-      .nav a.active {
-        background: var(--mint);
-        color: var(--ink);
-      }
-
-      .nav span {
-        display: grid;
-        width: 24px;
-        height: 24px;
-        place-items: center;
-        border-radius: 50%;
-        background: #fff;
-        color: var(--green-dark);
-        font-size: 11px;
-      }
-
-      .controls {
-        display: grid;
-        gap: 10px;
-      }
-
-      .button-row {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
-      }
-
-      .icon-button,
-      .text-button {
-        min-height: 40px;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: #fff;
-        color: var(--ink);
-        cursor: pointer;
-        font-weight: 800;
-      }
-
-      .text-button {
-        width: 100%;
-        padding: 10px 12px;
-        text-align: left;
-      }
-
-      .icon-button:hover,
-      .text-button:hover {
-        border-color: rgba(15, 91, 61, 0.32);
-        background: var(--mint);
+      .progress-label span:first-child {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .progress {
-        height: 8px;
+        height: 5px;
         overflow: hidden;
         border-radius: 999px;
-        background: rgba(22, 37, 29, 0.08);
+        background: rgba(23, 35, 29, 0.1);
       }
 
       .progress span {
         display: block;
-        width: 5%;
+        width: 6%;
         height: 100%;
         border-radius: inherit;
-        background: var(--green-dark);
+        background: var(--moss);
         transition: width 180ms ease;
+      }
+
+      .controls {
+        display: flex;
+        gap: 8px;
+      }
+
+      .control {
+        min-width: 42px;
+        min-height: 42px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--milk);
+        color: var(--forest);
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 900;
+      }
+
+      .control:hover {
+        border-color: rgba(40, 83, 63, 0.28);
+        background: var(--sage);
       }
 
       .deck {
@@ -206,40 +194,85 @@
       .slide {
         min-height: 100vh;
         display: grid;
-        align-items: center;
-        padding: 54px clamp(24px, 5vw, 72px);
+        align-items: stretch;
+        padding: var(--slide-pad-y) var(--slide-pad-x) calc(var(--slide-pad-y) + 58px);
+        scroll-snap-align: start;
         scroll-margin-top: 0;
       }
 
-      .slide-inner {
-        width: min(1120px, 100%);
+      .stage {
+        position: relative;
+        width: min(1220px, 100%);
+        min-height: min(720px, calc(100vh - var(--slide-pad-y) * 2 - 58px));
+        display: grid;
+        gap: clamp(24px, 3vw, 48px);
+        align-items: center;
         margin: 0 auto;
       }
 
-      @media (min-width: 981px) {
-        .slide-inner {
-          min-height: min(760px, calc(100vh - 108px));
-          display: grid;
-          align-items: center;
-        }
-
-        .slide-inner.content-stack {
-          align-content: center;
-        }
+      .stage::after {
+        position: absolute;
+        right: 0;
+        bottom: -28px;
+        color: rgba(23, 35, 29, 0.28);
+        content: attr(data-number);
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 0;
       }
 
-      .hero-grid,
-      .split {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(380px, 0.82fr);
-        gap: clamp(28px, 5vw, 64px);
+      .layout-hero,
+      .layout-two,
+      .layout-photo {
+        grid-template-columns: minmax(0, 1fr) minmax(360px, 0.82fr);
+      }
+
+      .layout-hero {
         align-items: center;
       }
 
-      .hero-copy,
-      .content-stack {
+      .layout-two {
+        align-items: center;
+      }
+
+      .layout-photo {
+        align-items: stretch;
+      }
+
+      .layout-stack {
+        align-content: center;
+      }
+
+      .copy {
         display: grid;
         gap: 22px;
+        min-width: 0;
+      }
+
+      .kicker {
+        display: inline-flex;
+        width: fit-content;
+        max-width: 100%;
+        align-items: center;
+        gap: 9px;
+        border: 1px solid rgba(40, 83, 63, 0.18);
+        border-radius: 999px;
+        background: rgba(255, 250, 240, 0.72);
+        color: var(--moss);
+        padding: 8px 12px;
+        font-size: 12px;
+        font-weight: 900;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      .kicker::before {
+        width: 8px;
+        height: 8px;
+        flex: 0 0 auto;
+        border-radius: 50%;
+        background: var(--leaf);
+        content: "";
       }
 
       h1,
@@ -249,90 +282,107 @@
         margin: 0;
       }
 
-      h1 {
-        max-width: 840px;
-        font-size: clamp(46px, 5.8vw, 88px);
+      h1,
+      h2 {
+        max-width: 920px;
+        color: var(--forest);
         font-weight: 900;
-        line-height: 0.98;
         letter-spacing: 0;
+      }
+
+      h1 {
+        font-size: clamp(62px, 6.4vw, 104px);
+        line-height: 0.96;
       }
 
       h2 {
-        max-width: 820px;
-        font-size: clamp(38px, 5.2vw, 74px);
-        font-weight: 900;
-        line-height: 0.98;
-        letter-spacing: 0;
+        font-size: clamp(44px, 4.7vw, 76px);
+        line-height: 1;
       }
 
       h3 {
-        font-size: 22px;
-        line-height: 1.15;
+        color: var(--forest);
+        font-size: clamp(20px, 1.55vw, 26px);
+        line-height: 1.13;
       }
 
       .lead {
-        max-width: 760px;
+        max-width: 780px;
         color: var(--muted);
-        font-size: clamp(21px, 1.9vw, 28px);
-        font-weight: 650;
+        font-size: clamp(22px, 1.85vw, 30px);
+        font-weight: 700;
+        line-height: 1.36;
       }
 
-      .big-quote {
-        border-left: 7px solid var(--green);
-        padding-left: 24px;
-        color: var(--navy);
-        font-size: clamp(28px, 3.2vw, 44px);
-        font-weight: 850;
+      .body-text {
+        max-width: 740px;
+        color: var(--muted);
+        font-size: clamp(18px, 1.32vw, 22px);
+        font-weight: 580;
+      }
+
+      .brand-line {
+        display: grid;
+        grid-template-columns: 7px minmax(0, 1fr);
+        gap: 18px;
+        max-width: 790px;
+        color: var(--forest);
+        font-size: clamp(28px, 3.1vw, 48px);
+        font-weight: 900;
         line-height: 1.08;
       }
 
-      .meta {
+      .brand-line::before {
+        border-radius: 999px;
+        background: var(--leaf);
+        content: "";
+      }
+
+      .chips {
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
       }
 
       .chip {
+        max-width: 100%;
         border: 1px solid var(--line);
         border-radius: 999px;
-        background: #fff;
-        padding: 8px 12px;
-        color: var(--muted);
+        background: rgba(255, 250, 240, 0.84);
+        color: var(--moss);
+        padding: 9px 13px;
         font-size: 13px;
-        font-weight: 800;
+        font-weight: 900;
+        overflow-wrap: anywhere;
       }
 
-      .visual {
+      .photo {
         position: relative;
         overflow: hidden;
+        min-height: 420px;
         border-radius: var(--radius);
-        background: #fff;
+        background: var(--linen);
         box-shadow: var(--shadow);
       }
 
-      .visual img {
+      .photo img {
         display: block;
         width: 100%;
         height: 100%;
-        min-height: 440px;
+        min-height: inherit;
         object-fit: cover;
       }
 
-      .visual.logo-card {
-        min-height: 460px;
-        display: grid;
-        place-items: center;
-        background:
-          linear-gradient(135deg, rgba(201, 233, 245, 0.78), rgba(223, 240, 227, 0.88)),
-          #fff;
-        padding: 44px;
+      .photo.tall {
+        min-height: 560px;
       }
 
-      .visual.logo-card img {
-        width: min(320px, 72%);
-        height: auto;
-        min-height: auto;
-        object-fit: contain;
+      .photo::after {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent 52%, rgba(17, 26, 53, 0.2));
+        content: "";
+        pointer-events: none;
       }
 
       .caption {
@@ -340,98 +390,117 @@
         right: 16px;
         bottom: 16px;
         left: 16px;
+        z-index: 2;
         border-radius: 8px;
-        background: rgba(255, 250, 240, 0.88);
-        padding: 12px 14px;
-        color: var(--ink);
-        font-size: 14px;
+        background: rgba(255, 250, 240, 0.9);
+        color: var(--forest);
+        padding: 13px 14px;
+        font-size: 15px;
+        font-weight: 850;
+      }
+
+      .logo-field {
+        min-height: 480px;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(40, 83, 63, 0.16);
+        border-radius: var(--radius);
+        background:
+          linear-gradient(140deg, rgba(217, 229, 214, 0.95), rgba(255, 250, 240, 0.86)),
+          var(--milk);
+        box-shadow: var(--shadow);
+        padding: 52px;
+      }
+
+      .logo-field-inner {
+        display: grid;
+        gap: 34px;
+        justify-items: start;
+      }
+
+      .logo-field img {
+        width: min(360px, 100%);
+        border-radius: 8px;
+        background: var(--navy);
+        padding: 28px 32px;
+      }
+
+      .logo-field p {
+        max-width: 430px;
+        color: var(--moss);
+        font-size: 22px;
         font-weight: 800;
       }
 
       .cards {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 16px;
+        gap: 14px;
+      }
+
+      .cards.two {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .cards.three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
       .card,
-      .note-card {
-        border: 1px solid var(--line);
+      .step,
+      .role {
+        min-width: 0;
+        border: 1px solid var(--soft-line);
         border-radius: var(--radius);
-        background: rgba(255, 250, 240, 0.84);
-        padding: 22px;
-        box-shadow: 0 10px 30px rgba(17, 26, 53, 0.06);
+        background: rgba(255, 250, 240, 0.78);
+        padding: clamp(20px, 2vw, 28px);
       }
 
-      .card.accent {
-        background: var(--mint);
+      .card.sage {
+        background: rgba(217, 229, 214, 0.88);
       }
 
-      .card.sky {
-        background: var(--sky);
+      .card.mist {
+        background: rgba(215, 231, 234, 0.82);
       }
 
-      .card.green {
-        background: #e7f6bd;
+      .card.leaf {
+        background: rgba(231, 245, 184, 0.9);
       }
 
       .card.clay {
-        background: #f1ddc8;
+        background: rgba(236, 216, 194, 0.86);
       }
 
-      .card small {
+      .card small,
+      .role small {
         display: block;
-        margin-bottom: 12px;
-        color: var(--green-dark);
+        margin-bottom: 16px;
+        color: var(--moss);
         font-size: 12px;
-        font-weight: 900;
+        font-weight: 950;
         letter-spacing: 0;
         text-transform: uppercase;
       }
 
       .card p,
-      .note-card p,
+      .step p,
+      .role p,
       li {
         color: var(--muted);
-        font-size: 18px;
+        font-size: clamp(16px, 1.12vw, 20px);
+        font-weight: 560;
+        overflow-wrap: anywhere;
       }
 
-      .card strong,
-      li strong {
-        color: var(--ink);
-      }
-
-      .agenda {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 14px;
-      }
-
-      .agenda-item {
-        display: grid;
-        grid-template-columns: 44px 1fr;
-        gap: 14px;
-        align-items: start;
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        background: #fff;
-        padding: 16px;
-      }
-
-      .num {
-        display: grid;
-        width: 44px;
-        height: 44px;
-        place-items: center;
-        border-radius: 50%;
-        background: var(--navy);
-        color: #fff;
-        font-weight: 900;
+      .card h3,
+      .role h3 {
+        margin-bottom: 10px;
       }
 
       .list {
         display: grid;
-        gap: 12px;
+        gap: 13px;
         margin: 0;
         padding: 0;
         list-style: none;
@@ -440,7 +509,7 @@
       .list li {
         position: relative;
         border-bottom: 1px solid var(--line);
-        padding: 0 0 12px 26px;
+        padding: 0 0 13px 28px;
       }
 
       .list li::before {
@@ -450,154 +519,262 @@
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background: var(--green);
+        background: var(--leaf);
         content: "";
       }
 
-      .role-grid {
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .step {
+        display: grid;
+        grid-template-columns: 54px minmax(0, 1fr);
+        gap: 16px;
+        align-items: start;
+        background: rgba(255, 250, 240, 0.86);
+      }
+
+      .num {
+        display: grid;
+        width: 54px;
+        height: 54px;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--forest);
+        color: var(--milk);
+        font-weight: 950;
+      }
+
+      .roles {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 14px;
       }
 
-      .role {
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        background: #fff;
-        padding: 18px;
-      }
-
-      .role h3 {
-        margin-bottom: 8px;
-        color: var(--green-dark);
-      }
-
-      .image-strip {
+      .photo-band {
         display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
+        grid-template-columns: 1.1fr 0.9fr;
         gap: 14px;
       }
 
-      .image-strip img {
+      .photo-band img {
         width: 100%;
-        height: 260px;
+        height: 320px;
         border-radius: var(--radius);
         object-fit: cover;
+        box-shadow: 0 18px 52px rgba(21, 30, 25, 0.11);
       }
 
-      .trainer-note {
+      .quote-slide {
+        background: var(--forest);
+        color: var(--milk);
+      }
+
+      .quote-slide .stage::after {
+        color: rgba(255, 250, 240, 0.35);
+      }
+
+      .quote-slide h2,
+      .quote-slide .lead,
+      .quote-slide .brand-line {
+        color: var(--milk);
+      }
+
+      .quote-slide .lead,
+      .quote-slide .body-text,
+      .quote-slide li {
+        color: rgba(255, 250, 240, 0.76);
+      }
+
+      .quote-slide .card {
+        border-color: rgba(255, 250, 240, 0.13);
+        background: rgba(255, 250, 240, 0.08);
+      }
+
+      .quote-slide .card h3,
+      .quote-slide .card small {
+        color: var(--milk);
+      }
+
+      .notes {
         display: none;
-        margin-top: 26px;
-        border: 1px solid rgba(15, 91, 61, 0.22);
-        border-radius: var(--radius);
-        background: rgba(223, 240, 227, 0.78);
-        padding: 16px 18px;
+        position: fixed;
+        z-index: 30;
+        right: 24px;
+        bottom: 104px;
+        width: min(460px, calc(100vw - 48px));
+        border: 1px solid rgba(40, 83, 63, 0.2);
+        border-radius: 10px;
+        background: rgba(255, 250, 240, 0.94);
+        box-shadow: var(--shadow);
+        padding: 18px 20px;
+        backdrop-filter: blur(18px);
       }
 
-      body.notes-on .trainer-note {
-        display: block;
+      body.notes-on .notes {
+        display: grid;
+        gap: 8px;
       }
 
-      .trainer-note strong {
-        display: block;
-        margin-bottom: 6px;
-        color: var(--green-dark);
-        font-size: 13px;
+      .notes strong {
+        color: var(--moss);
+        font-size: 12px;
+        font-weight: 950;
         text-transform: uppercase;
       }
 
-      .trainer-note p {
-        color: var(--ink);
+      .notes p {
+        color: var(--forest);
         font-size: 16px;
+        font-weight: 650;
       }
 
-      .section-kicker {
-        color: var(--green-dark);
-        font-size: 14px;
-        font-weight: 900;
-        letter-spacing: 0;
-        text-transform: uppercase;
-      }
-
-      .closing {
-        min-height: 100vh;
-        background: var(--navy);
-        color: #fffaf0;
-      }
-
-      .closing .lead,
-      .closing .card p,
-      .closing li {
-        color: rgba(255, 250, 240, 0.78);
-      }
-
-      .closing .card {
-        background: rgba(255, 250, 240, 0.08);
-        border-color: rgba(255, 250, 240, 0.16);
-      }
-
-      .closing .chip {
-        background: rgba(255, 250, 240, 0.08);
-        border-color: rgba(255, 250, 240, 0.18);
-        color: #fffaf0;
-      }
-
-      @media (max-width: 980px) {
-        .deck-shell {
-          grid-template-columns: 1fr;
+      @media (max-width: 1080px) {
+        :root {
+          --slide-pad-x: 24px;
+          --slide-pad-y: 86px;
         }
 
-        .sidebar {
-          position: fixed;
-          z-index: 10;
-          right: 14px;
-          bottom: 14px;
-          top: auto;
-          width: min(420px, calc(100% - 28px));
-          height: auto;
-          display: block;
-          padding: 10px;
-          border: 1px solid var(--line);
-          border-radius: 12px;
-          box-shadow: var(--shadow);
+        .topbar {
+          left: 12px;
+          right: 12px;
+          grid-template-columns: 1fr auto;
         }
 
-        .brand,
-        .nav {
+        .brand-context,
+        .progress-wrap {
           display: none;
         }
 
-        .controls {
-          gap: 8px;
-        }
-
-        .hero-grid,
-        .split,
-        .agenda,
+        .layout-hero,
+        .layout-two,
+        .layout-photo,
+        .photo-band,
         .cards,
-        .role-grid,
-        .image-strip {
+        .cards.two,
+        .cards.three,
+        .steps,
+        .roles {
           grid-template-columns: 1fr;
         }
 
-        .slide {
+        .stage {
           min-height: auto;
-          padding: 44px 18px 120px;
         }
 
-        .visual img,
-        .visual.logo-card {
-          min-height: 280px;
+        h1 {
+          font-size: clamp(44px, 12vw, 76px);
+        }
+
+        h2 {
+          font-size: clamp(34px, 9vw, 58px);
+        }
+
+        .photo,
+        .photo.tall,
+        .logo-field {
+          min-height: 320px;
         }
       }
 
-      @media (min-width: 1280px) {
-        .deck-shell {
-          grid-template-columns: 300px minmax(0, 1fr);
+      @media (max-height: 820px) and (min-width: 980px) {
+        :root {
+          --slide-pad-y: 48px;
+          --slide-pad-x: clamp(44px, 6vw, 78px);
         }
 
-        .slide-inner {
-          width: min(1180px, 100%);
+        .topbar {
+          bottom: 12px;
+          min-height: 54px;
+          padding: 7px 10px;
+        }
+
+        .brand-mark {
+          width: 122px;
+          height: 38px;
+        }
+
+        .control {
+          min-width: 38px;
+          min-height: 38px;
+        }
+
+        .stage {
+          min-height: calc(100vh - 150px);
+          gap: 22px;
+        }
+
+        h1 {
+          font-size: clamp(50px, 5.4vw, 76px);
+        }
+
+        h2 {
+          font-size: clamp(38px, 4.2vw, 58px);
+        }
+
+        .lead {
+          font-size: clamp(19px, 1.55vw, 24px);
+        }
+
+        .brand-line {
+          font-size: clamp(24px, 2.5vw, 34px);
+        }
+
+        .copy {
+          gap: 16px;
+        }
+
+        .cards,
+        .roles,
+        .steps {
+          gap: 12px;
+        }
+
+        .card,
+        .step,
+        .role {
+          padding: 18px;
+        }
+
+        .card small,
+        .role small {
+          margin-bottom: 10px;
+        }
+
+        .card p,
+        .step p,
+        .role p,
+        li {
+          font-size: 15px;
+          line-height: 1.34;
+        }
+
+        h3 {
+          font-size: 20px;
+        }
+
+        .photo {
+          min-height: 320px;
+        }
+
+        .photo.tall {
+          min-height: 420px;
+        }
+
+        .logo-field {
+          min-height: 360px;
+          padding: 36px;
+        }
+
+        .logo-field img {
+          width: min(300px, 100%);
+        }
+
+        .photo-band {
+          display: none;
         }
       }
 
@@ -606,402 +783,340 @@
           background: #fff;
         }
 
-        .sidebar,
-        .trainer-note {
+        .topbar,
+        .notes {
           display: none !important;
-        }
-
-        .deck-shell {
-          display: block;
         }
 
         .slide {
           min-height: 100vh;
           break-after: page;
-          padding: 30px;
+          padding: 38px;
         }
 
-        .visual,
-        .card,
-        .agenda-item,
-        .role {
-          box-shadow: none;
+        .stage {
+          min-height: auto;
         }
       }
     </style>
   </head>
   <body>
-    <div class="deck-shell">
-      <aside class="sidebar" aria-label="Навигация по тренингу">
-        <div class="brand">
-          <div class="brand-logo">
-            <img src="assets/garden-logo.png" alt="Garden">
-          </div>
-          <div class="eyebrow">Тренинг новичка</div>
+    <header class="topbar" aria-label="Управление презентацией">
+      <div class="brand">
+        <div class="brand-mark"><img src="assets/garden-logo.png" alt="Garden"></div>
+        <div class="brand-context">
+          <strong>Добро пожаловать в Garden</strong>
+          <span>вводный тренинг новичка</span>
         </div>
-        <nav class="nav" id="slideNav"></nav>
-        <div class="controls">
-          <div class="progress" aria-label="Прогресс"><span id="progressBar"></span></div>
-          <div class="button-row">
-            <button class="icon-button" type="button" data-prev title="Назад">←</button>
-            <button class="icon-button" type="button" data-next title="Вперёд">→</button>
-            <button class="icon-button" type="button" data-fullscreen title="Полный экран">⛶</button>
-          </div>
-          <button class="text-button" type="button" data-notes>Показать заметки ведущего</button>
-          <button class="text-button" type="button" data-print>Печать / PDF</button>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span id="currentTitle">Старт</span>
+          <span id="counter">1 / 16</span>
         </div>
-      </aside>
+        <div class="progress"><span id="progressBar"></span></div>
+      </div>
+      <div class="controls">
+        <button class="control" type="button" data-prev title="Назад">←</button>
+        <button class="control" type="button" data-next title="Вперёд">→</button>
+        <button class="control" type="button" data-notes title="Заметки ведущего">N</button>
+        <button class="control" type="button" data-fullscreen title="Полный экран">⛶</button>
+      </div>
+    </header>
 
-      <main class="deck" id="deck">
-        <section class="slide" id="start" data-title="Старт">
-          <div class="slide-inner hero-grid">
-            <div class="hero-copy">
-              <div class="eyebrow">45–60 минут · вводный тренинг</div>
-              <h1>Добро пожаловать в Garden</h1>
-              <p class="lead">Короткий маршрут для новичка: кто мы, как работаем, почему важна команда и что поможет уверенно войти в первые смены.</p>
-              <div class="meta">
-                <span class="chip">Светлая брендовая версия</span>
-                <span class="chip">Для ведущего и группы</span>
-                <span class="chip">Можно открыть через GitHub Pages</span>
-              </div>
-            </div>
-            <figure class="visual">
-              <img src="assets/welcome-image10.jpeg" alt="Интерьер кофейни Garden">
-              <figcaption class="caption">Garden — место в городе, куда возвращаются за теплом, вкусом и ощущением, что тебя ждут.</figcaption>
-            </figure>
-            <div class="trainer-note">
-              <strong>Заметка ведущего</strong>
-              <p>Начните спокойно: представьтесь, обозначьте длительность и цель. Важно сразу снять напряжение: это не экзамен, а знакомство с компанией и правилами.</p>
+    <main class="deck" id="deck">
+      <section class="slide" id="start" data-title="Старт" data-note="Начните спокойно: представьтесь, обозначьте длительность и цель. Это не экзамен, а знакомство с компанией и правилами.">
+        <div class="stage layout-hero" data-number="01">
+          <div class="copy">
+            <span class="kicker">45–60 минут · вводный тренинг</span>
+            <h1>Добро пожаловать в Garden</h1>
+            <p class="lead">Маршрут для новичка: кто мы, как работаем, почему важна команда и что поможет уверенно войти в первые смены.</p>
+            <div class="chips">
+              <span class="chip">для ноутбука и проектора</span>
+              <span class="chip">с заметками ведущего</span>
+              <span class="chip">каждый день — в Garden</span>
             </div>
           </div>
-        </section>
+          <figure class="photo tall">
+            <img src="assets/welcome-image10.jpeg" alt="Интерьер кофейни Garden">
+            <figcaption class="caption">Garden — место в городе, куда возвращаются за теплом, вкусом и ощущением, что тебя ждут.</figcaption>
+          </figure>
+        </div>
+      </section>
 
-        <section class="slide" id="rules" data-title="Правила тренинга">
-          <div class="slide-inner split">
-            <div class="content-stack">
-              <span class="section-kicker">Как работаем сегодня</span>
-              <h2>Три простых правила</h2>
-              <p class="lead">Чтобы встреча была полезной, договоримся о формате в начале.</p>
-            </div>
-            <div class="cards">
-              <article class="card accent"><small>01</small><h3>Звук выключен</h3><p>Телефон не отвлекает от группы и ведущего.</p></article>
-              <article class="card sky"><small>02</small><h3>Активное участие</h3><p>Отвечаем, обсуждаем, приводим примеры из жизни.</p></article>
-              <article class="card green"><small>03</small><h3>Вопросы сразу</h3><p>Если что-то непонятно, лучше уточнить на месте.</p></article>
-              <article class="card clay"><small>04</small><h3>Уважение</h3><p>Говорим спокойно, слушаем друг друга, не перебиваем.</p></article>
-            </div>
-            <div class="trainer-note">
-              <strong>Заметка ведущего</strong>
-              <p>Попросите участников назвать имя, роль и кофейню. Можно добавить короткий вопрос: “Что хочется понять сегодня в первую очередь?”</p>
-            </div>
+      <section class="slide" id="rules" data-title="Правила тренинга" data-note="Попросите участников назвать имя, роль и кофейню. Можно добавить вопрос: что хочется понять сегодня в первую очередь?">
+        <div class="stage layout-stack" data-number="02">
+          <div class="copy">
+            <span class="kicker">Как работаем сегодня</span>
+            <h2>Сначала договоримся о формате</h2>
+            <p class="lead">Встреча будет полезной, если у всех есть спокойствие, внимание и право задавать вопросы.</p>
           </div>
-        </section>
+          <div class="cards">
+            <article class="card sage"><small>01</small><h3>Звук выключен</h3><p>Телефон не отвлекает от группы, ведущего и собственного внимания.</p></article>
+            <article class="card mist"><small>02</small><h3>Участвуем</h3><p>Отвечаем, обсуждаем и примеряем правила к реальным сменам.</p></article>
+            <article class="card leaf"><small>03</small><h3>Вопросы сразу</h3><p>Если что-то непонятно, уточняем на месте, без неловкости.</p></article>
+            <article class="card clay"><small>04</small><h3>Уважение</h3><p>Говорим спокойно, слушаем друг друга и не перебиваем.</p></article>
+          </div>
+        </div>
+      </section>
 
-        <section class="slide" id="agenda" data-title="Маршрут">
-          <div class="slide-inner content-stack">
-            <span class="section-kicker">Что узнаем</span>
+      <section class="slide" id="agenda" data-title="Маршрут" data-note="Цель вводного тренинга — дать опору и понятную карту. Детали закрепляются на сменах с наставником.">
+        <div class="stage layout-stack" data-number="03">
+          <div class="copy">
+            <span class="kicker">Что узнаем</span>
             <h2>Маршрут новичка</h2>
-            <div class="agenda">
-              <article class="agenda-item"><div class="num">1</div><div><h3>Бренд и смысл</h3><p>Зачем существует Garden и какое ощущение мы создаём.</p></div></article>
-              <article class="agenda-item"><div class="num">2</div><div><h3>Ценности</h3><p>Как забота, постоянство, простота и естественность проявляются в смене.</p></div></article>
-              <article class="agenda-item"><div class="num">3</div><div><h3>Команда</h3><p>Кто за что отвечает, как связаны роли и к кому идти за помощью.</p></div></article>
-              <article class="agenda-item"><div class="num">4</div><div><h3>Рабочая база</h3><p>Сервис, внешний вид, чистота, конфликты, корпоративные инструменты.</p></div></article>
-              <article class="agenda-item"><div class="num">5</div><div><h3>Обучение</h3><p>Наставник, материалы, аттестации, тренинги и возможности роста.</p></div></article>
-              <article class="agenda-item"><div class="num">6</div><div><h3>Первый план</h3><p>Что делать после тренинга и как легче пройти первые недели.</p></div></article>
-            </div>
-            <div class="trainer-note">
-              <strong>Заметка ведущего</strong>
-              <p>Не обещайте рассказать “всё обо всём”. Цель вводного тренинга — дать опору и понятную карту, а детали закрепляются на сменах с наставником.</p>
+          </div>
+          <div class="steps">
+            <article class="step"><div class="num">1</div><div><h3>Бренд и смысл</h3><p>Зачем существует Garden и какое ощущение мы создаём.</p></div></article>
+            <article class="step"><div class="num">2</div><div><h3>Ценности</h3><p>Как забота, постоянство, простота и естественность проявляются в смене.</p></div></article>
+            <article class="step"><div class="num">3</div><div><h3>Команда</h3><p>Кто за что отвечает, как связаны роли и к кому идти за помощью.</p></div></article>
+            <article class="step"><div class="num">4</div><div><h3>Рабочая база</h3><p>Сервис, внешний вид, чистота, конфликты, инструменты.</p></div></article>
+            <article class="step"><div class="num">5</div><div><h3>Обучение</h3><p>Наставник, материалы, аттестации и возможности роста.</p></div></article>
+            <article class="step"><div class="num">6</div><div><h3>Первый план</h3><p>Что делать после тренинга и как легче пройти первые недели.</p></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide quote-slide" id="brand" data-title="Смысл Garden" data-note="Свяжите бренд с действиями: приветствие, чистая станция, стабильный вкус, спокойный тон. Бренд проявляется в поведении.">
+        <div class="stage layout-two" data-number="04">
+          <div class="copy">
+            <span class="kicker">Платформа бренда</span>
+            <h2>Garden — тёплое место внутри города</h2>
+            <p class="brand-line">Мы создаём место, куда хочется возвращаться каждый день: за кофе, за теплом и за ощущением, что всё в порядке.</p>
+          </div>
+          <div class="logo-field">
+            <div class="logo-field-inner">
+              <img src="assets/garden-logo.png" alt="Garden">
+              <p>Свет, воздух, спокойствие, живое внимание и честный вкус — это не декор, а ежедневная практика.</p>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="slide" id="brand" data-title="Смысл Garden">
-          <div class="slide-inner split">
-            <div class="content-stack">
-              <span class="section-kicker">Платформа бренда</span>
-              <h2>Garden — тёплое место внутри города</h2>
-              <p class="big-quote">Мы создаём место, куда хочется возвращаться каждый день: за кофе, за теплом и за ощущением, что всё в порядке.</p>
-            </div>
-            <div class="visual logo-card">
-              <img src="assets/garden-logo.svg" alt="Garden">
-            </div>
-            <div class="trainer-note">
-              <strong>Заметка ведущего</strong>
-              <p>Свяжите бренд с ежедневными действиями: приветствие, чистая станция, стабильный вкус, спокойный тон. Бренд проявляется не в лозунгах, а в поведении.</p>
-            </div>
+      <section class="slide" id="values" data-title="Ценности" data-note="Попросите участников привести пример: как эта ценность выглядит на смене? Записывайте ответы словами команды.">
+        <div class="stage layout-stack" data-number="05">
+          <div class="copy">
+            <span class="kicker">Что важно каждый день</span>
+            <h2>Ценности Garden — это решения на смене</h2>
           </div>
-        </section>
-
-        <section class="slide" id="values" data-title="Ценности">
-          <div class="slide-inner content-stack">
-            <span class="section-kicker">Что важно каждый день</span>
-            <h2>Четыре ценности Garden</h2>
-            <div class="cards">
-              <article class="card accent"><small>Забота</small><h3>Не услуга, а отношение</h3><p>Комфорт в разговоре, вкусе, атмосфере и деталях.</p></article>
-              <article class="card sky"><small>Постоянство</small><h3>Знак доверия</h3><p>Гость возвращается, когда вкус и настроение не подводят.</p></article>
-              <article class="card green"><small>Простота</small><h3>Форма уважения</h3><p>Говорим и действуем понятно, без лишних усложнений.</p></article>
-              <article class="card clay"><small>Естественность</small><h3>Быть настоящими</h3><p>Garden живой, человеческий и спокойный, а не показной.</p></article>
-            </div>
-            <figure class="visual">
-              <img src="assets/book-image17.png" alt="Визуал с ценностями Garden">
-            </figure>
-            <div class="trainer-note">
-              <strong>Заметка ведущего</strong>
-              <p>Попросите участников привести по одному примеру: “Как эта ценность выглядит на смене?” Записывайте ответы словами команды.</p>
-            </div>
+          <div class="cards">
+            <article class="card sage"><small>Забота</small><h3>Не услуга, а отношение</h3><p>Комфорт в разговоре, вкусе, атмосфере и деталях.</p></article>
+            <article class="card mist"><small>Постоянство</small><h3>Знак доверия</h3><p>Гость возвращается, когда вкус и настроение не подводят.</p></article>
+            <article class="card leaf"><small>Простота</small><h3>Форма уважения</h3><p>Говорим и действуем понятно, без лишних усложнений.</p></article>
+            <article class="card clay"><small>Естественность</small><h3>Быть настоящими</h3><p>Garden живой, человеческий и спокойный, а не показной.</p></article>
           </div>
-        </section>
-
-        <section class="slide" id="differences" data-title="Чем отличаемся">
-          <div class="slide-inner split">
-            <div class="content-stack">
-              <span class="section-kicker">Почему нас выбирают</span>
-              <h2>Чем Garden отличается</h2>
-              <ul class="list">
-                <li><strong>Собственная обжарка</strong> и контроль качества зерна.</li>
-                <li><strong>Тренинг-центры</strong>, наставничество и развитие внутри команды.</li>
-                <li><strong>Кондитерский цех</strong>, сезонные линейки и простая еда с душой.</li>
-                <li><strong>Тёплый сервис</strong>, живые пространства и человеческое отношение внутри.</li>
-              </ul>
-            </div>
-            <div class="image-strip">
-              <img src="assets/book-image13.png" alt="Фирменные материалы Garden">
-              <img src="assets/welcome-image11.jpeg" alt="Гости в кофейне Garden">
-            </div>
-            <div class="trainer-note">
-              <strong>Заметка ведущего</strong>
-              <p>Сделайте акцент: отличия должны быть заметны гостю в конкретных мелочах, а не только в презентации.</p>
-            </div>
+          <div class="photo-band">
+            <img src="assets/book-image17.png" alt="Ценности Garden">
+            <img src="assets/welcome-image11.jpeg" alt="Гости в кофейне Garden">
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="slide" id="team" data-title="Команда">
-          <div class="slide-inner split">
-            <div class="content-stack">
-              <span class="section-kicker">Сердце компании</span>
-              <h2>Команда держит атмосферу</h2>
-              <ul class="list">
-                <li><strong>Поддержка</strong> помогает новичку быстрее почувствовать уверенность.</li>
-                <li><strong>Коммуникация</strong> снижает ошибки и напряжение.</li>
-                <li><strong>Обратная связь</strong> делает работу понятнее и сильнее.</li>
-                <li><strong>Взаимопомощь</strong> превращает роли в одну команду.</li>
-              </ul>
-            </div>
-            <figure class="visual">
-              <img src="assets/welcome-image37.jpeg" alt="Команда Garden">
-              <figcaption class="caption">Команда — не фон работы, а основа гостевого опыта.</figcaption>
-            </figure>
-            <div class="trainer-note">
-              <strong>Заметка ведущего</strong>
-              <p>Можно провести быстрый круг: “Кто помогает тебе в первые дни?” Если группа новая, объясните роль управляющего, заместителя и наставника.</p>
-            </div>
+      <section class="slide" id="differences" data-title="Чем отличаемся" data-note="Отличия должны быть заметны гостю в конкретных мелочах, а не только в презентации.">
+        <div class="stage layout-two" data-number="06">
+          <div class="copy">
+            <span class="kicker">Почему нас выбирают</span>
+            <h2>Garden держится на понятных вещах</h2>
+            <ul class="list">
+              <li><strong>Собственная обжарка</strong> и контроль качества зерна.</li>
+              <li><strong>Тренинг-центры</strong>, наставничество и развитие внутри команды.</li>
+              <li><strong>Кондитерский цех</strong>, сезонные линейки и простая еда с душой.</li>
+              <li><strong>Тёплый сервис</strong>, живые пространства и человеческое отношение внутри.</li>
+            </ul>
           </div>
-        </section>
+          <figure class="photo">
+            <img src="assets/book-image13.png" alt="Фирменные материалы Garden">
+            <figcaption class="caption">Честный продукт, спокойная атмосфера и внимание к людям.</figcaption>
+          </figure>
+        </div>
+      </section>
 
-        <section class="slide" id="roles" data-title="Роли">
-          <div class="slide-inner content-stack">
-            <span class="section-kicker">Кто за что отвечает</span>
-            <h2>Роли команды</h2>
-            <div class="role-grid">
-              <article class="role"><h3>Управляющий</h3><p>Главный по результату, стандартам и решению важных вопросов.</p></article>
-              <article class="role"><h3>Заместитель</h3><p>Следит за порядком, помогает с текущими задачами и сменой.</p></article>
-              <article class="role"><h3>Бариста</h3><p>Готовит напитки, держит вкус и создаёт контакт с гостем.</p></article>
-              <article class="role"><h3>Помощник бариста</h3><p>Учится, помогает на станции и постепенно берёт больше задач.</p></article>
-              <article class="role"><h3>Повар</h3><p>Готовит блюда, следит за качеством, чистотой и деталями.</p></article>
-              <article class="role"><h3>Технический работник</h3><p>Поддерживает чистоту, комфорт и порядок в кофейне.</p></article>
-            </div>
-            <div class="trainer-note">
-              <strong>Заметка ведущего</strong>
-              <p>Задайте вопрос: “Где у ролей общая зона ответственности?” Подведите к ответу: гость, чистота, скорость, атмосфера и уважение друг к другу.</p>
-            </div>
+      <section class="slide quote-slide" id="team" data-title="Команда" data-note="Можно провести быстрый круг: кто помогает тебе в первые дни? Объясните роль управляющего, заместителя и наставника.">
+        <div class="stage layout-photo" data-number="07">
+          <div class="copy">
+            <span class="kicker">Сердце компании</span>
+            <h2>Команда держит атмосферу</h2>
+            <p class="lead">Гость чувствует не только кофе и еду. Он чувствует, как команда говорит, помогает, реагирует и держит общий ритм.</p>
           </div>
-        </section>
+          <figure class="photo tall">
+            <img src="assets/welcome-image37.jpeg" alt="Команда Garden">
+            <figcaption class="caption">Поддержка, коммуникация, обратная связь и взаимопомощь.</figcaption>
+          </figure>
+        </div>
+      </section>
 
-        <section class="slide" id="service" data-title="База сервиса">
-          <div class="slide-inner split">
-            <div class="content-stack">
-              <span class="section-kicker">База Garden</span>
-              <h2>Поведение, которое чувствует гость</h2>
-              <ul class="list">
-                <li>Приветствие, вежливость и зрительный контакт.</li>
-                <li>Улыбка и гость как приоритет без игнорирования.</li>
-                <li>Уважение к коллегам, без сплетен и обесценивания.</li>
-                <li>Готовность помочь, если рядом нужна поддержка.</li>
-              </ul>
-            </div>
-            <figure class="visual">
-              <img src="assets/welcome-image2.jpeg" alt="Сотрудники Garden">
-              <figcaption class="caption">Тёплый сервис начинается с нормального человеческого тона.</figcaption>
-            </figure>
-            <div class="trainer-note">
-              <strong>Заметка ведущего</strong>
-              <p>Здесь хорошо работает мини-сценка: один участник гость, второй сотрудник. Сравните “формально правильно” и “по-человечески тепло”.</p>
-            </div>
+      <section class="slide" id="roles" data-title="Роли" data-note="Задайте вопрос: где у ролей общая зона ответственности? Подведите к ответу: гость, чистота, скорость, атмосфера и уважение.">
+        <div class="stage layout-stack" data-number="08">
+          <div class="copy">
+            <span class="kicker">Кто за что отвечает</span>
+            <h2>Разные роли — одна команда</h2>
           </div>
-        </section>
-
-        <section class="slide" id="conflicts" data-title="Конфликты">
-          <div class="slide-inner content-stack">
-            <span class="section-kicker">Когда что-то пошло не так</span>
-            <h2>Разрешение конфликтов</h2>
-            <div class="cards">
-              <article class="card accent"><small>1</small><h3>Споры вне смены</h3><p>Не выясняем отношения при гостях и в горячий момент.</p></article>
-              <article class="card sky"><small>2</small><h3>Причина, не обвинение</h3><p>Разбираем, что произошло и как исправить, а не кто плохой.</p></article>
-              <article class="card green"><small>3</small><h3>Ищем решение</h3><p>Предлагаем вариант и договариваемся о следующем шаге.</p></article>
-              <article class="card clay"><small>4</small><h3>Зовём помощь</h3><p>Если не получается, обращаемся к заместителю или управляющему.</p></article>
-            </div>
-            <div class="trainer-note">
-              <strong>Заметка ведущего</strong>
-              <p>Можно разобрать реальную бытовую ситуацию: задержка блюда, ошибка в напитке, напряжение между баром и кухней. Главное — перевести обсуждение в действия.</p>
-            </div>
+          <div class="roles">
+            <article class="role"><small>Управляющий</small><h3>Результат и стандарты</h3><p>Помогает решать важные вопросы и держит общий план.</p></article>
+            <article class="role"><small>Заместитель</small><h3>Порядок смены</h3><p>Поддерживает текущие задачи и помогает команде в моменте.</p></article>
+            <article class="role"><small>Бариста</small><h3>Вкус и контакт</h3><p>Готовит напитки, держит качество и создаёт диалог с гостем.</p></article>
+            <article class="role"><small>Помощник бариста</small><h3>Обучение руками</h3><p>Учится, помогает на станции и постепенно берёт больше задач.</p></article>
+            <article class="role"><small>Повар</small><h3>Еда и детали</h3><p>Готовит блюда, следит за качеством, чистотой и ТТК.</p></article>
+            <article class="role"><small>Технический работник</small><h3>Чистота и уют</h3><p>Поддерживает комфорт, порядок и ощущение ухоженного места.</p></article>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="slide" id="rules-work" data-title="Правила кофейни">
-          <div class="slide-inner split">
-            <div class="content-stack">
-              <span class="section-kicker">Рабочая база</span>
-              <h2>Правила работы в кофейне</h2>
-              <ul class="list">
-                <li>Чистые руки, чистая посуда, соблюдение зон.</li>
-                <li>Работа по ТТК и внимание к качеству продуктов.</li>
-                <li>Корректное взаимодействие с поставщиками.</li>
-                <li>Музыка, техника безопасности, санитарные нормы и должностная инструкция.</li>
-                <li>Корпоративные инструменты: iiko, рабочие чаты и ВК.</li>
-              </ul>
-            </div>
-            <figure class="visual">
-              <img src="assets/welcome-image9.jpeg" alt="Рабочая зона кофейни Garden">
-              <figcaption class="caption">Порядок в деталях делает смену спокойнее и понятнее.</figcaption>
-            </figure>
-            <div class="trainer-note">
-              <strong>Заметка ведущего</strong>
-              <p>Не превращайте слайд в инструктаж по каждой норме. Отметьте, где лежат подробные материалы и кто проверяет выполнение стандартов.</p>
-            </div>
+      <section class="slide" id="service" data-title="База сервиса" data-note="Хорошо работает мини-сценка: один участник гость, второй сотрудник. Сравните формально правильно и по-человечески тепло.">
+        <div class="stage layout-two" data-number="09">
+          <div class="copy">
+            <span class="kicker">База Garden</span>
+            <h2>Поведение, которое чувствует гость</h2>
+            <ul class="list">
+              <li>Приветствие, вежливость и зрительный контакт.</li>
+              <li>Улыбка и гость как приоритет без игнорирования.</li>
+              <li>Уважение к коллегам, без сплетен и обесценивания.</li>
+              <li>Готовность помочь, если рядом нужна поддержка.</li>
+            </ul>
           </div>
-        </section>
+          <figure class="photo">
+            <img src="assets/welcome-image2.jpeg" alt="Сотрудники Garden">
+            <figcaption class="caption">Тёплый сервис начинается с нормального человеческого тона.</figcaption>
+          </figure>
+        </div>
+      </section>
 
-        <section class="slide" id="appearance" data-title="Внешний вид">
-          <div class="slide-inner content-stack">
-            <span class="section-kicker">Образ, который вдохновляет</span>
+      <section class="slide" id="conflicts" data-title="Конфликты" data-note="Разберите реальную ситуацию: задержка блюда, ошибка в напитке, напряжение между баром и кухней. Переведите обсуждение в действия.">
+        <div class="stage layout-stack" data-number="10">
+          <div class="copy">
+            <span class="kicker">Когда что-то пошло не так</span>
+            <h2>Конфликт решается спокойным процессом</h2>
+          </div>
+          <div class="cards">
+            <article class="card sage"><small>1</small><h3>Споры вне смены</h3><p>Не выясняем отношения при гостях и в горячий момент.</p></article>
+            <article class="card mist"><small>2</small><h3>Причина, не обвинение</h3><p>Разбираем, что произошло и как исправить, а не кто плохой.</p></article>
+            <article class="card leaf"><small>3</small><h3>Ищем решение</h3><p>Предлагаем вариант и договариваемся о следующем шаге.</p></article>
+            <article class="card clay"><small>4</small><h3>Зовём помощь</h3><p>Если не получается, обращаемся к заместителю или управляющему.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="rules-work" data-title="Правила кофейни" data-note="Не превращайте слайд в инструктаж по каждой норме. Отметьте, где лежат подробные материалы и кто проверяет стандарты.">
+        <div class="stage layout-two" data-number="11">
+          <div class="copy">
+            <span class="kicker">Рабочая база</span>
+            <h2>Порядок в деталях делает смену спокойнее</h2>
+            <ul class="list">
+              <li>Чистые руки, чистая посуда, соблюдение зон.</li>
+              <li>Работа по ТТК и внимание к качеству продуктов.</li>
+              <li>Корректное взаимодействие с поставщиками.</li>
+              <li>Музыка, техника безопасности, санитарные нормы и должностная инструкция.</li>
+              <li>Корпоративные инструменты: iiko, рабочие чаты и ВК.</li>
+            </ul>
+          </div>
+          <figure class="photo">
+            <img src="assets/welcome-image9.jpeg" alt="Рабочая зона кофейни Garden">
+            <figcaption class="caption">Стандарты нужны не для строгости, а для предсказуемого качества.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slide" id="appearance" data-title="Внешний вид" data-note="Проведите правда или ложь: называйте спорные примеры, а группа решает, подходит ли это для смены и почему.">
+        <div class="stage layout-stack" data-number="12">
+          <div class="copy">
+            <span class="kicker">Образ, который вдохновляет</span>
             <h2>Внешний вид — часть заботы</h2>
-            <div class="cards">
-              <article class="card accent"><small>Опрятность</small><p>Одежда чистая, аккуратная, без загрязнений и повреждений.</p></article>
-              <article class="card sky"><small>Обувь</small><p>Удобная, нескользкая, безопасная и легко очищается.</p></article>
-              <article class="card green"><small>Украшения</small><p>Ничего лишнего, что мешает работе или безопасности.</p></article>
-              <article class="card clay"><small>Гигиена</small><p>Чистота, ухоженные руки и ногти, аккуратный внешний вид.</p></article>
-            </div>
-            <div class="trainer-note">
-              <strong>Заметка ведущего</strong>
-              <p>Проведите “правда или ложь”: называйте спорные примеры, а группа решает, подходит ли это для смены и почему.</p>
-            </div>
+            <p class="lead">Он помогает работать удобно, безопасно и создавать у гостя ощущение чистого, внимательного места.</p>
           </div>
-        </section>
-
-        <section class="slide" id="first-weeks" data-title="Первые недели">
-          <div class="slide-inner split">
-            <div class="content-stack">
-              <span class="section-kicker">Как легче войти в работу</span>
-              <h2>Советы новичкам</h2>
-              <ul class="list">
-                <li>Учись по шагам, маленькими кусочками.</li>
-                <li>Визуализируй, практикуй и повторяй руками.</li>
-                <li>Не бойся задавать вопросы наставнику.</li>
-                <li>Используй материалы в любое время.</li>
-                <li>Готовься к аттестации спокойно и по плану.</li>
-                <li>Следи за рабочими чатами и ставь реакции.</li>
-              </ul>
-            </div>
-            <figure class="visual">
-              <img src="assets/welcome-image7.jpeg" alt="Светлая кофейня Garden">
-              <figcaption class="caption">Первые дни могут быть насыщенными. Нормально учиться постепенно.</figcaption>
-            </figure>
-            <div class="trainer-note">
-              <strong>Заметка ведущего</strong>
-              <p>Закрепите идею: ошибка в обучении — повод разобраться, а не повод молчать. Важнее вовремя спросить и исправить.</p>
-            </div>
+          <div class="cards">
+            <article class="card sage"><small>Опрятность</small><h3>Чистая одежда</h3><p>Без загрязнений, повреждений и вещей, которые мешают работе.</p></article>
+            <article class="card mist"><small>Обувь</small><h3>Безопасность</h3><p>Удобная, нескользкая, закрытая и легко очищается.</p></article>
+            <article class="card leaf"><small>Украшения</small><h3>Ничего лишнего</h3><p>То, что мешает работе или безопасности, остаётся вне смены.</p></article>
+            <article class="card clay"><small>Гигиена</small><h3>Ухоженность</h3><p>Чистота, аккуратные руки и внимание к деталям образа.</p></article>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="slide" id="community" data-title="Комьюнити">
-          <div class="slide-inner content-stack">
-            <span class="section-kicker">Коммуникация</span>
-            <h2>Комьюнити Garden</h2>
-            <div class="agenda">
-              <article class="agenda-item"><div class="num">VK</div><div><h3>Рабочий ВК</h3><p>Основной канал для команды, новостей, вопросов и рабочих материалов.</p></div></article>
-              <article class="agenda-item"><div class="num">ID</div><div><h3>Настоящее имя и фото</h3><p>Так коллегам проще понимать, кто пишет и к кому обращаться.</p></div></article>
-              <article class="agenda-item"><div class="num">↗</div><div><h3>Рабочие чаты</h3><p>Следим за новостями, реагируем на важные сообщения, не теряем контекст.</p></div></article>
-              <article class="agenda-item"><div class="num">?</div><div><h3>Если не получается</h3><p>Пишем руководителю или наставнику, не остаёмся с вопросом один на один.</p></div></article>
-            </div>
-            <div class="trainer-note">
-              <strong>Заметка ведущего</strong>
-              <p>Покажите, какие чаты обязательны для новичка, где писать по сменным вопросам, а где искать учебные материалы.</p>
-            </div>
+      <section class="slide" id="first-weeks" data-title="Первые недели" data-note="Ошибка в обучении — повод разобраться, а не повод молчать. Важнее вовремя спросить и исправить.">
+        <div class="stage layout-two" data-number="13">
+          <div class="copy">
+            <span class="kicker">Как легче войти в работу</span>
+            <h2>Первые недели проходят по шагам</h2>
+            <ul class="list">
+              <li>Учись маленькими кусочками и повторяй руками.</li>
+              <li>Визуализируй, практикуй и проси показать ещё раз.</li>
+              <li>Не бойся задавать вопросы наставнику.</li>
+              <li>Используй материалы в любое время.</li>
+              <li>Готовься к аттестации спокойно и по плану.</li>
+              <li>Следи за рабочими чатами и ставь реакции.</li>
+            </ul>
           </div>
-        </section>
+          <figure class="photo">
+            <img src="assets/welcome-image7.jpeg" alt="Светлая кофейня Garden">
+            <figcaption class="caption">Нормально учиться постепенно. Важнее двигаться стабильно.</figcaption>
+          </figure>
+        </div>
+      </section>
 
-        <section class="slide" id="learning" data-title="Обучение">
-          <div class="slide-inner split">
-            <div class="content-stack">
-              <span class="section-kicker">Рост внутри компании</span>
-              <h2>Обучение и развитие</h2>
-              <ul class="list">
-                <li>Мы тренируемся постоянно: сервис, продажи, альтернатива, эспрессо, молоко.</li>
-                <li>Повара обучаются вместе с су-шефами и наставниками.</li>
-                <li>Наставничество — один из принципов нашей работы.</li>
-                <li>Переаттестации проходят каждый год.</li>
-                <li>Развитие открывает новые роли и карьерные возможности.</li>
-              </ul>
-            </div>
-            <figure class="visual">
-              <img src="assets/welcome-image40.jpeg" alt="Командное событие Garden">
-              <figcaption class="caption">Рост в Garden — это путь, который проходят шаг за шагом.</figcaption>
-            </figure>
-            <div class="trainer-note">
-              <strong>Заметка ведущего</strong>
-              <p>Назовите реальные ближайшие шаги после вводного тренинга: наставник, карта обучения, первая обратная связь, подготовка к аттестации.</p>
-            </div>
+      <section class="slide" id="community" data-title="Комьюнити" data-note="Покажите, какие чаты обязательны для новичка, где писать по сменным вопросам и где искать учебные материалы.">
+        <div class="stage layout-stack" data-number="14">
+          <div class="copy">
+            <span class="kicker">Коммуникация</span>
+            <h2>Комьюнити Garden помогает не теряться</h2>
           </div>
-        </section>
+          <div class="steps">
+            <article class="step"><div class="num">VK</div><div><h3>Рабочий ВК</h3><p>Основной канал для команды, новостей, вопросов и рабочих материалов.</p></div></article>
+            <article class="step"><div class="num">ID</div><div><h3>Настоящее имя и фото</h3><p>Коллегам проще понимать, кто пишет и к кому обращаться.</p></div></article>
+            <article class="step"><div class="num">↗</div><div><h3>Рабочие чаты</h3><p>Следим за новостями, реагируем на важные сообщения, не теряем контекст.</p></div></article>
+            <article class="step"><div class="num">?</div><div><h3>Если не получается</h3><p>Пишем руководителю или наставнику, не остаёмся с вопросом один на один.</p></div></article>
+          </div>
+        </div>
+      </section>
 
-        <section class="slide closing" id="finish" data-title="Финал">
-          <div class="slide-inner content-stack">
-            <span class="section-kicker">Финальный акцент</span>
+      <section class="slide" id="learning" data-title="Обучение" data-note="Назовите ближайшие шаги: наставник, карта обучения, первая обратная связь, подготовка к аттестации.">
+        <div class="stage layout-two" data-number="15">
+          <div class="copy">
+            <span class="kicker">Рост внутри компании</span>
+            <h2>Обучение — часть нашей культуры</h2>
+            <ul class="list">
+              <li>Мы тренируемся постоянно: сервис, продажи, альтернатива, эспрессо, молоко.</li>
+              <li>Повара обучаются вместе с су-шефами и наставниками.</li>
+              <li>Наставничество — один из принципов нашей работы.</li>
+              <li>Переаттестации проходят каждый год.</li>
+              <li>Развитие открывает новые роли и карьерные возможности.</li>
+            </ul>
+          </div>
+          <figure class="photo">
+            <img src="assets/welcome-image40.jpeg" alt="Командное событие Garden">
+            <figcaption class="caption">Рост в Garden — это путь, который проходят шаг за шагом.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slide quote-slide" id="finish" data-title="Финал" data-note="Закончите конкретным действием: кому написать, где материалы, когда следующая встреча или первая проверка.">
+        <div class="stage layout-stack" data-number="16">
+          <div class="copy">
+            <span class="kicker">Финальный акцент</span>
             <h2>Ты не один на старте</h2>
             <p class="lead">В Garden важно не знать всё сразу, а быть внимательным, задавать вопросы, учиться по шагам и поддерживать тёплое человеческое отношение — к гостям, коллегам и себе.</p>
-            <div class="cards">
-              <article class="card"><small>После тренинга</small><p>Уточни у наставника свой ближайший план обучения.</p></article>
-              <article class="card"><small>В первые смены</small><p>Записывай вопросы и проси обратную связь по конкретным действиям.</p></article>
-              <article class="card"><small>Всегда</small><p>Помни: Garden начинается с людей, которые делают день теплее.</p></article>
-              <article class="card"><small>Обратная связь</small><p>После встречи можно собрать вопросы и предложения для HR или управляющего.</p></article>
-            </div>
-            <div class="meta">
-              <span class="chip">Каждый день — в Garden</span>
-              <span class="chip">Тепло · вкус · спокойствие</span>
-            </div>
-            <div class="trainer-note">
-              <strong>Заметка ведущего</strong>
-              <p>Закончите конкретным действием: кому написать, где материалы, когда следующая встреча или первая проверка. Не оставляйте финал только эмоциональным.</p>
-            </div>
           </div>
-        </section>
-      </main>
-    </div>
+          <div class="cards">
+            <article class="card"><small>После тренинга</small><h3>План с наставником</h3><p>Уточни ближайший маршрут обучения и первые контрольные точки.</p></article>
+            <article class="card"><small>В первые смены</small><h3>Вопросы и обратная связь</h3><p>Записывай вопросы и проси комментарии по конкретным действиям.</p></article>
+            <article class="card"><small>Всегда</small><h3>Тепло начинается с людей</h3><p>Garden делают живым те, кто внимателен к гостям и команде.</p></article>
+            <article class="card"><small>Обратная связь</small><h3>Говори, если нужна помощь</h3><p>Можно обратиться к наставнику, управляющему или HR.</p></article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <aside class="notes" id="notesPanel" aria-live="polite">
+      <strong>Заметка ведущего</strong>
+      <p id="notesText"></p>
+    </aside>
 
     <script>
       const slides = Array.from(document.querySelectorAll(".slide"));
-      const nav = document.querySelector("#slideNav");
-      const progress = document.querySelector("#progressBar");
+      const progressBar = document.querySelector("#progressBar");
+      const currentTitle = document.querySelector("#currentTitle");
+      const counter = document.querySelector("#counter");
+      const notesText = document.querySelector("#notesText");
       const notesButton = document.querySelector("[data-notes]");
-
-      slides.forEach((slide, index) => {
-        const link = document.createElement("a");
-        link.href = `#${slide.id}`;
-        link.innerHTML = `<span>${index + 1}</span>${slide.dataset.title}`;
-        nav.appendChild(link);
-      });
-
-      const navLinks = Array.from(nav.querySelectorAll("a"));
 
       function currentIndex() {
         const midpoint = window.scrollY + window.innerHeight / 2;
@@ -1014,10 +1129,12 @@
 
       function updateState() {
         const index = currentIndex();
-        navLinks.forEach((link, linkIndex) => {
-          link.classList.toggle("active", linkIndex === index);
-        });
-        progress.style.width = `${((index + 1) / slides.length) * 100}%`;
+        const slide = slides[index];
+        const title = slide.dataset.title || "";
+        currentTitle.textContent = title;
+        counter.textContent = `${index + 1} / ${slides.length}`;
+        progressBar.style.width = `${((index + 1) / slides.length) * 100}%`;
+        notesText.textContent = slide.dataset.note || "";
       }
 
       function go(delta) {
@@ -1027,7 +1144,9 @@
 
       document.querySelector("[data-prev]").addEventListener("click", () => go(-1));
       document.querySelector("[data-next]").addEventListener("click", () => go(1));
-      document.querySelector("[data-print]").addEventListener("click", () => window.print());
+      notesButton.addEventListener("click", () => {
+        document.body.classList.toggle("notes-on");
+      });
 
       document.querySelector("[data-fullscreen]").addEventListener("click", () => {
         if (!document.fullscreenElement) {
@@ -1037,19 +1156,13 @@
         }
       });
 
-      notesButton.addEventListener("click", () => {
-        document.body.classList.toggle("notes-on");
-        notesButton.textContent = document.body.classList.contains("notes-on")
-          ? "Скрыть заметки ведущего"
-          : "Показать заметки ведущего";
-      });
-
       window.addEventListener("scroll", updateState, { passive: true });
       window.addEventListener("resize", updateState);
       window.addEventListener("keydown", (event) => {
-        if (event.key === "ArrowRight" || event.key === "PageDown") go(1);
+        if (event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") go(1);
         if (event.key === "ArrowLeft" || event.key === "PageUp") go(-1);
         if (event.key.toLowerCase() === "n") notesButton.click();
+        if (event.key.toLowerCase() === "p") window.print();
       });
 
       updateState();
