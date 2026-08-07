@@ -665,13 +665,13 @@
     }
 
     .photo-card.person-photo img {
-      object-fit: cover;
-      object-position: center top;
+      object-fit: contain;
+      object-position: center bottom;
     }
 
     .photo-grid.six .photo-card.person-photo img {
-      object-fit: cover;
-      object-position: center 12%;
+      object-fit: contain;
+      object-position: center bottom;
     }
 
     .photo-grid.people-strip .photo-card.person-photo {
@@ -691,6 +691,40 @@
       min-height: 60px;
       padding: 10px 12px;
       font-size: clamp(13px, 0.9vw, 16px);
+    }
+
+    .photo-grid.kitchen-team {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .photo-grid.kitchen-team .photo-card {
+      height: min(40vh, 360px);
+    }
+
+    .photo-card.placeholder {
+      display: grid;
+      place-items: center;
+      padding: 24px 24px 78px;
+      color: var(--text);
+    }
+
+    .photo-card.placeholder::before {
+      content: "";
+      position: absolute;
+      inset: 22px 22px 76px;
+      border: 2px dashed currentColor;
+      opacity: 0.35;
+    }
+
+    .placeholder-copy {
+      position: relative;
+      max-width: 210px;
+      font-size: clamp(18px, 1.2vw, 24px);
+      line-height: 1.08;
+      font-weight: 800;
+      text-align: center;
+      opacity: 0.82;
     }
 
     .photo-card span {
@@ -766,6 +800,47 @@
       object-fit: contain;
       object-position: center bottom;
       display: block;
+    }
+
+    .video-slide .stage {
+      max-width: min(1120px, calc(100vw - 120px));
+    }
+
+    .video-slide {
+      padding-top: clamp(28px, 4vw, 54px);
+    }
+
+    .video-slide h2 {
+      max-width: 860px;
+      font-size: clamp(42px, 4.8vw, 76px);
+    }
+
+    .video-frame {
+      width: min(640px, 100%);
+      aspect-ratio: 16 / 9;
+      margin-top: 16px;
+      overflow: hidden;
+      border: 2px solid var(--line);
+      background: var(--graphite);
+      box-shadow: var(--shadow);
+    }
+
+    .video-frame video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .video-slide .focus-card {
+      max-width: 760px;
+      margin-top: 18px;
+      padding: 22px 26px;
+    }
+
+    .video-slide .focus-card p {
+      font-size: clamp(20px, 2vw, 32px);
+      line-height: 1.08;
     }
 
     .qr-row {
@@ -1450,10 +1525,10 @@
         <h2>Люди, которые держат кофейное направление</h2>
         <div class="photo-grid six people-strip">
           <div class="photo-card small person-photo"><img src="assets/ppt/slide09-01.png" alt="Сергей" /><span>Сергей, директор</span></div>
-          <div class="photo-card small person-photo"><img src="assets/ppt/slide09-02.jpg" alt="Иван" /><span>Иван, операционный директор</span></div>
-          <div class="photo-card small person-photo"><img src="assets/ppt/slide09-03.jpg" alt="Александр" /><span>Александр, обжарщик</span></div>
-          <div class="photo-card small person-photo"><img src="assets/ppt/slide09-06.jpg" alt="Владимир" /><span>Владимир, руководитель ТЦ бариста</span></div>
-          <div class="photo-card small person-photo"><img src="assets/ppt/slide09-04.jpg" alt="Алексей" /><span>Алексей, бренд-бариста</span></div>
+          <div class="photo-card small person-photo"><img src="assets/ppt/alexander-roaster-new.jpg" alt="Александр" /><span>Александр, обжарщик</span></div>
+          <div class="photo-card small person-photo"><img src="assets/ppt/vladimir-new.jpg" alt="Владимир" /><span>Владимир, руководитель ТЦ бариста</span></div>
+          <div class="photo-card small person-photo"><img src="assets/ppt/aleksey-brand-new.jpg" alt="Алексей" /><span>Алексей, бренд-бариста</span></div>
+          <div class="photo-card small person-photo"><img src="assets/ppt/ivan-new.jpg" alt="Иван" /><span>Иван, операционный директор</span></div>
           <div class="photo-card small"><img src="assets/ppt/slide09-05.jpg" alt="Кофейни" /><span>Кофейни</span></div>
         </div>
       </div>
@@ -1464,9 +1539,11 @@
       <div class="stage">
         <p class="kicker">Кухня</p>
         <h2>Люди, которые отвечают за еду и вкус</h2>
-        <div class="photo-grid two people-pair">
-          <div class="photo-card portrait person-photo"><img src="assets/ppt/slide10-01-rot.jpg" alt="Зуфар" /><span>Зуфар, бренд-шеф</span></div>
-          <div class="photo-card portrait person-photo"><img src="assets/ppt/slide10-02.jpg" alt="Даниил" /><span>Даниил, шеф-повар</span></div>
+        <div class="photo-grid four kitchen-team">
+          <div class="photo-card portrait person-photo"><img src="assets/ppt/zufar-new.jpg" alt="Зуфар" /><span>Зуфар, бренд-шеф</span></div>
+          <div class="photo-card portrait person-photo"><img src="assets/ppt/daniil-new.jpg" alt="Даниил" /><span>Даниил, шеф-повар</span></div>
+          <div class="photo-card portrait person-photo"><img src="assets/ppt/aleksey-kamarin.jpg" alt="Алексей Камарин" /><span>Алексей Камарин, шеф-повар</span></div>
+          <div class="photo-card portrait person-photo placeholder"><div class="placeholder-copy">Фото добавим позже</div><span>Иван Бубенщиков, шеф-повар</span></div>
         </div>
       </div>
     </section>
@@ -1477,12 +1554,12 @@
         <p class="kicker">Управление и поддержка</p>
         <h2>Команда, которая помогает системе работать</h2>
         <div class="photo-grid six people-strip">
-          <div class="photo-card small person-photo"><img src="assets/ppt/slide11-02.jpg" alt="Гузель" /><span>Гузель, директор</span></div>
+          <div class="photo-card small person-photo"><img src="assets/ppt/guzel-new.jpg" alt="Гузель" /><span>Гузель, директор</span></div>
           <div class="photo-card small person-photo"><img src="assets/ppt/slide11-01.jpg" alt="Гульнара" /><span>Гульнара, главный бухгалтер</span></div>
-          <div class="photo-card small person-photo"><img src="assets/ppt/slide11-03.jpg" alt="Анастасия" /><span>Анастасия, HR-директор</span></div>
-          <div class="photo-card small person-photo"><img src="assets/ppt/slide11-04.jpg" alt="Анна" /><span>Анна, руководитель отдела сервиса</span></div>
-          <div class="photo-card small person-photo"><img src="assets/ppt/slide11-05.jpg" alt="Ксения" /><span>Ксения, руководитель маркетинга</span></div>
-          <div class="photo-card small person-photo"><img src="assets/ppt/slide11-06.jpg" alt="Арслан" /><span>Арслан, бар-менеджер</span></div>
+          <div class="photo-card small person-photo"><img src="assets/ppt/anastasia-new.jpg" alt="Анастасия" /><span>Анастасия, HR-директор</span></div>
+          <div class="photo-card small person-photo"><img src="assets/ppt/anna-new.jpg" alt="Анна" /><span>Анна, руководитель отдела сервиса</span></div>
+          <div class="photo-card small person-photo"><img src="assets/ppt/ksenia-new.jpg" alt="Ксения" /><span>Ксения, руководитель маркетинга</span></div>
+          <div class="photo-card small person-photo"><img src="assets/ppt/arslan-new.jpg" alt="Арслан" /><span>Арслан, бар-менеджер</span></div>
         </div>
       </div>
     </section>
@@ -1493,9 +1570,9 @@
         <p class="kicker">Маркетинг</p>
         <h2>Как Garden говорит с городом</h2>
         <div class="photo-grid three">
-          <div class="photo-card portrait person-photo"><img src="assets/ppt/slide12-01.jpg" alt="Ксения" /><span>Ксения, руководитель маркетинга</span></div>
-          <div class="photo-card portrait person-photo"><img src="assets/ppt/slide12-03.jpg" alt="Варя" /><span>Варя, СММ</span></div>
-          <div class="photo-card portrait person-photo"><img src="assets/ppt/slide12-02.jpg" alt="Стас" /><span>Стас, маркетолог</span></div>
+          <div class="photo-card portrait person-photo"><img src="assets/ppt/ksenia-new.jpg" alt="Ксения" /><span>Ксения, руководитель маркетинга</span></div>
+          <div class="photo-card portrait person-photo"><img src="assets/ppt/varya-new.jpg" alt="Варя" /><span>Варя, СММ</span></div>
+          <div class="photo-card portrait person-photo"><img src="assets/ppt/stas-new.jpg" alt="Стас" /><span>Стас, маркетолог</span></div>
         </div>
       </div>
     </section>
@@ -1506,8 +1583,8 @@
         <p class="kicker">Кондитерский цех</p>
         <h2>Люди, которые отвечают за сладкое направление</h2>
         <div class="photo-grid two people-pair">
-          <div class="photo-card portrait person-photo"><img src="assets/ppt/slide13-01.jpg" alt="Татьяна" /><span>Татьяна, директор</span></div>
-          <div class="photo-card portrait person-photo"><img src="assets/ppt/slide13-02.jpg" alt="Галина" /><span>Галина, заведующая кондитерским цехом</span></div>
+          <div class="photo-card portrait person-photo"><img src="assets/ppt/tatyana-new.jpg" alt="Татьяна" /><span>Татьяна, директор</span></div>
+          <div class="photo-card portrait person-photo"><img src="assets/ppt/ekaterina.jpg" alt="Екатерина" /><span>Екатерина, шеф-кондитер</span></div>
         </div>
       </div>
     </section>
@@ -1518,45 +1595,45 @@
         <p class="kicker">Инженерия</p>
         <h2>Люди, которые поддерживают техническую основу</h2>
         <div class="photo-grid two people-pair">
-          <div class="photo-card portrait person-photo"><img src="assets/ppt/slide14-01.jpg" alt="Олег" /><span>Олег, директор</span></div>
-          <div class="photo-card portrait person-photo"><img src="assets/ppt/slide14-02.jpg" alt="Александр" /><span>Александр, главный инженер</span></div>
+          <div class="photo-card portrait person-photo"><img src="assets/ppt/oleg-new.jpg" alt="Олег" /><span>Олег, директор</span></div>
+          <div class="photo-card portrait person-photo"><img src="assets/ppt/alexander-engineer-new.jpg" alt="Александр" /><span>Александр, главный инженер</span></div>
         </div>
       </div>
     </section>
 
     <section class="slide" data-theme="graphite" data-title="Интерактив 1">
       <span class="slide-index">15</span>
-      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/slide15-01.jpg" alt="Интерактив: кто он?" /></div></div>
+      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/slide09-01.png" alt="Сергей" /></div></div>
     </section>
 
     <section class="slide" data-theme="mint" data-title="Интерактив 2">
       <span class="slide-index">16</span>
-      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/slide16-01.jpg" alt="Интерактив: кто он?" /></div></div>
+      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/guzel-new.jpg" alt="Гузель" /></div></div>
     </section>
 
     <section class="slide" data-theme="sky" data-title="Интерактив 3">
       <span class="slide-index">17</span>
-      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/slide09-03.jpg" alt="Интерактив: кто он?" /></div></div>
+      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/oleg-new.jpg" alt="Олег" /></div></div>
     </section>
 
     <section class="slide" data-theme="violet" data-title="Интерактив 4">
       <span class="slide-index">18</span>
-      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/slide11-03.jpg" alt="Интерактив: кто он?" /></div></div>
+      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/tatyana-new.jpg" alt="Татьяна" /></div></div>
     </section>
 
     <section class="slide" data-theme="green" data-title="Интерактив 5">
       <span class="slide-index">19</span>
-      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/slide12-01.jpg" alt="Интерактив: кто он?" /></div></div>
+      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/stas-new.jpg" alt="Стас" /></div></div>
     </section>
 
     <section class="slide" data-theme="graphite" data-title="Интерактив 6">
       <span class="slide-index">20</span>
-      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/slide20-01.jpg" alt="Интерактив: кто он?" /></div></div>
+      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/varya-new.jpg" alt="Варя" /></div></div>
     </section>
 
     <section class="slide" data-theme="lime" data-title="Интерактив 7">
       <span class="slide-index">21</span>
-      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/slide21-01.jpg" alt="Интерактив: кто он?" /></div></div>
+      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/alexander-roaster-new.jpg" alt="Александр" /></div></div>
     </section>
 
     <section class="slide" data-theme="green" data-title="Сердце компании" data-brand-art="corner">
@@ -1600,11 +1677,12 @@
       </div>
     </section>
 
-    <section class="slide" data-theme="graphite" data-title="Когда всё пошло не по плану" data-brand-art="corner">
+    <section class="slide video-slide" data-theme="graphite" data-title="Когда всё пошло не по плану" data-brand-art="corner">
       <span class="slide-index">25</span>
       <div class="stage">
         <p class="kicker">Разбор видео</p>
         <h2>Когда всё пошло не по плану</h2>
+        <div class="video-frame"><video src="assets/ppt/slide25-video.mp4" controls preload="metadata"></video></div>
         <div class="focus-card"><p>Что было не так в видео?</p><small>Ищем не виноватых, а причины: коммуникация, стандарт, темп, реакция команды.</small></div>
       </div>
     </section>
@@ -1672,7 +1750,7 @@
           <p class="lead">Главное — комфорт, безопасность, чистота и аккуратность.</p>
         </div>
         <div class="checklist">
-          <div class="check"><i>1</i><div><strong>Опрятный вид</strong><span>Одежда чистая, аккуратная, не рваная и не загрязнённая.</span></div></div>
+          <div class="check"><i>1</i><div><strong>Опрятный вид</strong><span>Одежда чистая, аккуратная, не рваная и не загрязнённая; волосы собраны.</span></div></div>
           <div class="check"><i>2</i><div><strong>Обувь</strong><span>Удобная, нескользкая и легко чистится.</span></div></div>
           <div class="check"><i>3</i><div><strong>Рабочая одежда</strong><span>Корпоративная или удобная, не мешает двигаться и работать.</span></div></div>
           <div class="check"><i>4</i><div><strong>Гигиена и украшения</strong><span>Чистота, постриженные ногти, без лишних украшений и открытого пирсинга.</span></div></div>
