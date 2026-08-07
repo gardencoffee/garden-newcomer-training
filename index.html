@@ -635,8 +635,9 @@
     }
 
     .photo-grid.people-strip {
-      grid-template-columns: repeat(6, minmax(0, 1fr));
+      grid-template-columns: repeat(6, minmax(0, 178px));
       gap: 12px;
+      justify-content: center;
     }
 
     .photo-card {
@@ -694,8 +695,9 @@
     }
 
     .photo-grid.kitchen-team {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 270px));
       gap: 14px;
+      justify-content: center;
     }
 
     .photo-grid.kitchen-team .photo-card {
@@ -756,6 +758,17 @@
       height: min(49vh, 420px);
     }
 
+    .photo-grid.two.people-pair:has(.person-photo) {
+      max-width: 760px;
+      grid-template-columns: repeat(2, minmax(0, 320px));
+      justify-content: center;
+    }
+
+    .photo-grid.three:has(.person-photo) {
+      grid-template-columns: repeat(3, minmax(0, 320px));
+      justify-content: center;
+    }
+
     .photo-card.small {
       height: min(30vh, 250px);
     }
@@ -784,7 +797,7 @@
     }
 
     .single-photo {
-      width: min(34vw, 390px);
+      width: min(30vw, 340px);
       max-height: 470px;
       aspect-ratio: 3 / 4;
       justify-self: center;
@@ -1603,41 +1616,66 @@
 
     <section class="slide" data-theme="graphite" data-title="Интерактив 1">
       <span class="slide-index">15</span>
-      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/slide09-01.png" alt="Сергей" /></div></div>
+      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/slide15-01.jpg" alt="Интерактив: кто он?" /></div></div>
     </section>
 
     <section class="slide" data-theme="mint" data-title="Интерактив 2">
       <span class="slide-index">16</span>
-      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/guzel-new.jpg" alt="Гузель" /></div></div>
+      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/slide16-01.jpg" alt="Интерактив: кто он?" /></div></div>
     </section>
 
     <section class="slide" data-theme="sky" data-title="Интерактив 3">
       <span class="slide-index">17</span>
-      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/oleg-new.jpg" alt="Олег" /></div></div>
+      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/slide09-03.jpg" alt="Интерактив: кто он?" /></div></div>
     </section>
 
     <section class="slide" data-theme="violet" data-title="Интерактив 4">
       <span class="slide-index">18</span>
-      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/tatyana-new.jpg" alt="Татьяна" /></div></div>
+      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/slide11-03.jpg" alt="Интерактив: кто он?" /></div></div>
     </section>
 
     <section class="slide" data-theme="green" data-title="Интерактив 5">
       <span class="slide-index">19</span>
-      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/stas-new.jpg" alt="Стас" /></div></div>
+      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/slide12-01.jpg" alt="Интерактив: кто он?" /></div></div>
     </section>
 
     <section class="slide" data-theme="graphite" data-title="Интерактив 6">
       <span class="slide-index">20</span>
-      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/varya-new.jpg" alt="Варя" /></div></div>
+      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/slide20-01.jpg" alt="Интерактив: кто он?" /></div></div>
     </section>
 
     <section class="slide" data-theme="lime" data-title="Интерактив 7">
       <span class="slide-index">21</span>
-      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/alexander-roaster-new.jpg" alt="Александр" /></div></div>
+      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/slide09-01.png" alt="Сергей" /></div></div>
+    </section>
+
+    <section class="slide" data-theme="mint" data-title="Интерактив 8">
+      <span class="slide-index">22</span>
+      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/guzel-new.jpg" alt="Гузель" /></div></div>
+    </section>
+
+    <section class="slide" data-theme="sky" data-title="Интерактив 9">
+      <span class="slide-index">23</span>
+      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/oleg-new.jpg" alt="Олег" /></div></div>
+    </section>
+
+    <section class="slide" data-theme="violet" data-title="Интерактив 10">
+      <span class="slide-index">24</span>
+      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/tatyana-new.jpg" alt="Татьяна" /></div></div>
+    </section>
+
+    <section class="slide" data-theme="green" data-title="Интерактив 11">
+      <span class="slide-index">25</span>
+      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/stas-new.jpg" alt="Стас" /></div></div>
+    </section>
+
+    <section class="slide" data-theme="graphite" data-title="Интерактив 12">
+      <span class="slide-index">26</span>
+      <div class="stage photo-layout"><div><p class="kicker">Интерактив</p><h2>Кто он?<br>Чем занимается?</h2></div><div class="single-photo"><img src="assets/ppt/varya-new.jpg" alt="Варя" /></div></div>
     </section>
 
     <section class="slide" data-theme="green" data-title="Сердце компании" data-brand-art="corner">
-      <span class="slide-index">22</span>
+      <span class="slide-index">27</span>
       <div class="stage">
         <p class="kicker">Команда</p>
         <h2>Сердце компании — команда</h2>
@@ -1652,7 +1690,7 @@
     </section>
 
     <section class="slide" data-theme="sky" data-title="Роли команды" data-brand-art="soft">
-      <span class="slide-index">23</span>
+      <span class="slide-index">28</span>
       <div class="stage">
         <p class="kicker">Роли команды</p>
         <h2>Каждая роль держит свою часть опыта гостя</h2>
@@ -1669,7 +1707,7 @@
     </section>
 
     <section class="slide" data-theme="violet" data-title="Две роли — одна команда" data-brand-art="left">
-      <span class="slide-index">24</span>
+      <span class="slide-index">29</span>
       <div class="stage">
         <p class="kicker">Командная практика</p>
         <h2>Две роли — одна команда</h2>
@@ -1678,7 +1716,7 @@
     </section>
 
     <section class="slide video-slide" data-theme="graphite" data-title="Когда всё пошло не по плану" data-brand-art="corner">
-      <span class="slide-index">25</span>
+      <span class="slide-index">30</span>
       <div class="stage">
         <p class="kicker">Разбор видео</p>
         <h2>Когда всё пошло не по плану</h2>
@@ -1688,7 +1726,7 @@
     </section>
 
     <section class="slide" data-theme="mint" data-title="База Garden" data-brand-art="soft">
-      <span class="slide-index">26</span>
+      <span class="slide-index">31</span>
       <div class="stage">
         <p class="kicker">База Garden</p>
         <h2>Поведение, которое должно быть всегда</h2>
@@ -1706,7 +1744,7 @@
     </section>
 
     <section class="slide" data-theme="green" data-title="Разрешение конфликтов" data-brand-art="top">
-      <span class="slide-index">27</span>
+      <span class="slide-index">32</span>
       <div class="stage split">
         <div>
           <p class="kicker">Внутри команды</p>
@@ -1723,7 +1761,7 @@
     </section>
 
     <section class="slide" data-theme="sky" data-title="Правила работы" data-brand-art="soft">
-      <span class="slide-index">28</span>
+      <span class="slide-index">33</span>
       <div class="stage">
         <p class="kicker">Правила работы в кофейне</p>
         <h2>База безопасности, качества и порядка</h2>
@@ -1742,7 +1780,7 @@
     </section>
 
     <section class="slide" data-theme="green" data-title="Внешний вид" data-brand-art="top">
-      <span class="slide-index">29</span>
+      <span class="slide-index">34</span>
       <div class="stage split">
         <div>
           <p class="kicker">Образ, который вдохновляет</p>
@@ -1759,7 +1797,7 @@
     </section>
 
     <section class="slide" data-theme="violet" data-title="Мифы о внешнем виде" data-brand-art="corner">
-      <span class="slide-index">30</span>
+      <span class="slide-index">35</span>
       <div class="stage">
         <p class="kicker">Интерактив</p>
         <h2>Ловим мифы о внешнем виде: правда или ложь?</h2>
@@ -1768,7 +1806,7 @@
     </section>
 
     <section class="slide" data-theme="lime" data-title="Советы новичкам" data-brand-art="left">
-      <span class="slide-index">31</span>
+      <span class="slide-index">36</span>
       <div class="stage">
         <p class="kicker">Адаптация</p>
         <h2>Советы новичкам: как быстро и легко войти в работу</h2>
@@ -1787,7 +1825,7 @@
     </section>
 
     <section class="slide" data-theme="green" data-title="Комьюнити Garden" data-brand-art="soft">
-      <span class="slide-index">32</span>
+      <span class="slide-index">37</span>
       <div class="stage split">
         <div>
           <p class="kicker">Комьюнити Garden</p>
@@ -1802,7 +1840,7 @@
     </section>
 
     <section class="slide" data-theme="graphite" data-title="Обучение и развитие" data-brand-art="wash">
-      <span class="slide-index">33</span>
+      <span class="slide-index">38</span>
       <div class="stage">
         <p class="kicker">Обучение и развитие</p>
         <h2>Мы тренируемся постоянно</h2>
@@ -1816,7 +1854,7 @@
     </section>
 
     <section class="slide" data-theme="sky" data-title="Возможности роста" data-brand-art="corner">
-      <span class="slide-index">34</span>
+      <span class="slide-index">39</span>
       <div class="stage">
         <p class="kicker">Возможности роста</p>
         <h2>Каждое развитие — это возможность</h2>
@@ -1825,7 +1863,7 @@
     </section>
 
     <section class="slide" data-theme="violet" data-title="История успеха">
-      <span class="slide-index">35</span>
+      <span class="slide-index">40</span>
       <div class="stage">
         <p class="kicker">История успеха</p>
         <h2>Рост внутри команды</h2>
@@ -1838,7 +1876,7 @@
     </section>
 
     <section class="slide" data-theme="green" data-title="Культура и команда" data-brand-art="soft">
-      <span class="slide-index">36</span>
+      <span class="slide-index">41</span>
       <div class="stage">
         <p class="kicker">Культура и команда</p>
         <h2>Командная культура видна в живых моментах</h2>
@@ -1853,7 +1891,7 @@
     </section>
 
     <section class="slide" data-theme="green" data-title="Обратная связь" data-brand-art="top">
-      <span class="slide-index">37</span>
+      <span class="slide-index">42</span>
       <div class="stage split">
         <div>
           <p class="kicker">Твой стиль в нашей эстетике</p>
@@ -1921,6 +1959,11 @@
       ["Связать роли с ценностями Garden.", "Попросить назвать ценность и пример поведения."],
       ["Показать последствия слабой коммуникации между ролями.", "Увести обсуждение от персональных оценок к процессам."],
       ["Собрать карту ответственности.", "Закрепить ключевую мысль: роли разные, цель общая."],
+      ["Продолжить интерактив с новой карточкой.", "Попросить назвать роль и объяснить, как этот человек влияет на работу кофейни."],
+      ["Продолжить интерактив с новой карточкой.", "Связать ответ участников с конкретной зоной ответственности."],
+      ["Продолжить интерактив с новой карточкой.", "Подчеркнуть, к кому обращаться по похожим вопросам."],
+      ["Продолжить интерактив с новой карточкой.", "Попросить участников сформулировать один рабочий пример взаимодействия."],
+      ["Завершить интерактив по ролям.", "Собрать вывод: у каждой роли своя зона, но результат общий для гостя."],
       ["Показать команду как сердце компании.", "Попросить участников выбрать один пункт, который им важнее всего в смене."],
       ["Разобрать роли команды в кофейне.", "При необходимости дополнить примерами из конкретной точки."],
       ["Сравнить роли бариста и повара.", "Сфокусироваться на общем результате для гостя."],
