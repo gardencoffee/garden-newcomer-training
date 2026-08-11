@@ -704,6 +704,19 @@
       height: min(40vh, 360px);
     }
 
+    .photo-grid.event-collage {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 28px;
+      max-width: 1040px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .photo-grid.event-collage .photo-card.small {
+      height: min(18vh, 158px);
+    }
+
     .photo-card.placeholder {
       display: grid;
       place-items: center;
@@ -1556,7 +1569,7 @@
           <div class="photo-card portrait person-photo"><img src="assets/ppt/zufar-new.jpg" alt="Зуфар" /><span>Зуфар, бренд-шеф</span></div>
           <div class="photo-card portrait person-photo"><img src="assets/ppt/daniil-new.jpg" alt="Даниил" /><span>Даниил, шеф-повар</span></div>
           <div class="photo-card portrait person-photo"><img src="assets/ppt/aleksey-kamarin.jpg" alt="Алексей Камарин" /><span>Алексей Камарин, шеф-повар</span></div>
-          <div class="photo-card portrait person-photo placeholder"><div class="placeholder-copy">Фото добавим позже</div><span>Иван Бубенщиков, шеф-повар</span></div>
+          <div class="photo-card portrait person-photo"><img src="assets/ppt/ivan-bubenshchikov.jpg" alt="Иван Бубенщиков" /><span>Иван Бубенщиков, шеф-повар</span></div>
         </div>
       </div>
     </section>
@@ -1880,12 +1893,16 @@
       <div class="stage">
         <p class="kicker">Культура и команда</p>
         <h2>Командная культура видна в живых моментах</h2>
-        <div class="photo-grid five">
+        <div class="photo-grid event-collage">
           <div class="photo-card small"><img src="assets/ppt/slide36-05.jpg" alt="Культура Garden" /></div>
           <div class="photo-card small"><img src="assets/ppt/slide36-02.jpg" alt="Культура Garden" /></div>
           <div class="photo-card small"><img src="assets/ppt/slide36-04.jpg" alt="Культура Garden" /></div>
           <div class="photo-card small"><img src="assets/ppt/slide36-01.jpg" alt="Культура Garden" /></div>
           <div class="photo-card small"><img src="assets/ppt/slide36-03.jpg" alt="Культура Garden" /></div>
+          <div class="photo-card small"><img src="assets/ppt/event-01.jpg" alt="Корпоративное мероприятие Garden" /></div>
+          <div class="photo-card small"><img src="assets/ppt/event-02.jpg" alt="Корпоративное мероприятие Garden" /></div>
+          <div class="photo-card small"><img src="assets/ppt/event-03.jpg" alt="Корпоративное мероприятие Garden" /></div>
+          <div class="photo-card small"><img src="assets/ppt/event-04.jpg" alt="Корпоративное мероприятие Garden" /></div>
         </div>
       </div>
     </section>
