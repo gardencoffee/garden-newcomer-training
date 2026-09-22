@@ -538,6 +538,69 @@
       color: color-mix(in srgb, currentColor 76%, transparent);
     }
 
+    .appearance-stage h2 {
+      max-width: 1040px;
+      font-size: clamp(38px, 4vw, 64px);
+      line-height: 1;
+    }
+
+    .appearance-stage .lead {
+      max-width: 860px;
+      margin-top: 16px;
+      font-size: clamp(20px, 1.8vw, 30px);
+      line-height: 1.14;
+    }
+
+    .appearance-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(400px, 1.05fr);
+      gap: clamp(20px, 3vw, 42px);
+      align-items: center;
+      margin-top: 18px;
+    }
+
+    .appearance-visual {
+      overflow: hidden;
+      border: 2px solid var(--line);
+      background: var(--white);
+      box-shadow: var(--shadow);
+      max-width: 620px;
+      justify-self: center;
+    }
+
+    .appearance-visual img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .appearance-stage .checklist {
+      margin-top: 0;
+      gap: 8px;
+    }
+
+    .appearance-stage .check {
+      grid-template-columns: 40px minmax(0, 1fr);
+      gap: 12px;
+      padding: 11px 14px;
+    }
+
+    .appearance-stage .check i {
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+    }
+
+    .appearance-stage .check strong {
+      font-size: clamp(17px, 1.22vw, 22px);
+      margin-bottom: 4px;
+    }
+
+    .appearance-stage .check span {
+      font-size: clamp(13px, 0.92vw, 16px);
+      line-height: 1.2;
+    }
+
     .matrix {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1246,7 +1309,8 @@
     @media (max-width: 1100px) {
       .split,
       .band,
-      .photo-layout {
+      .photo-layout,
+      .appearance-layout {
         grid-template-columns: 1fr;
       }
 
@@ -1706,7 +1770,7 @@
       <span class="slide-index">28</span>
       <div class="stage">
         <p class="kicker">Роли команды</p>
-        <h2>Каждая роль держит свою часть опыта гостя</h2>
+        <h2>Кто за что отвечает в команде</h2>
         <div class="matrix role-grid">
           <div class="matrix-card"><strong>Управляющий</strong><p>Главный по результату и хранитель стандартов.</p></div>
           <div class="matrix-card"><strong>Заместитель</strong><p>Решает текущие задачи и помогает смене идти гладко.</p></div>
@@ -1794,17 +1858,18 @@
 
     <section class="slide" data-theme="green" data-title="Внешний вид" data-brand-art="top">
       <span class="slide-index">34</span>
-      <div class="stage split">
-        <div>
-          <p class="kicker">Образ, который вдохновляет</p>
-          <h2>Внешний вид влияет на качество работы и настроение команды</h2>
-          <p class="lead">Главное — комфорт, безопасность, чистота и аккуратность.</p>
-        </div>
+      <div class="stage appearance-stage">
+        <p class="kicker">Образ, который вдохновляет</p>
+        <h2>Внешний вид влияет на качество работы и настроение команды</h2>
+        <p class="lead">Главное — комфорт, безопасность, чистота и аккуратность.</p>
+        <div class="appearance-layout">
+          <div class="appearance-visual"><img src="assets/ppt/appearance-uniform.jpg" alt="Пример рабочего внешнего вида Garden" /></div>
         <div class="checklist">
           <div class="check"><i>1</i><div><strong>Опрятный вид</strong><span>Одежда чистая, аккуратная, не рваная и не загрязнённая; волосы собраны.</span></div></div>
           <div class="check"><i>2</i><div><strong>Обувь</strong><span>Удобная, нескользкая и легко чистится.</span></div></div>
           <div class="check"><i>3</i><div><strong>Рабочая одежда</strong><span>Корпоративная или удобная, не мешает двигаться и работать.</span></div></div>
           <div class="check"><i>4</i><div><strong>Гигиена и украшения</strong><span>Чистота, постриженные ногти, без лишних украшений и открытого пирсинга.</span></div></div>
+        </div>
         </div>
       </div>
     </section>
